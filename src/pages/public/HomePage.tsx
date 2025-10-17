@@ -1,49 +1,15 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Search, HelpCircle, MessageSquare, Clock, Shield, Zap } from 'lucide-react'
+import { ArrowRight, HelpCircle, MessageSquare } from 'lucide-react'
 import Button from '@/components/ui/Button'
 import Card from '@/components/ui/Card'
 
 const HomePage = () => {
-  const features = [
-    {
-      icon: Search,
-      title: 'Quick Search',
-      description: 'Find answers instantly with our powerful search functionality.',
-    },
-    {
-      icon: HelpCircle,
-      title: 'Comprehensive FAQs',
-      description: 'Browse through our extensive knowledge base organized by categories.',
-    },
-    {
-      icon: MessageSquare,
-      title: 'Direct Support',
-      description: 'Can\'t find what you\'re looking for? Contact our support team directly.',
-    },
-    {
-      icon: Clock,
-      title: '24/7 Access',
-      description: 'Get help anytime with our always-available self-service resources.',
-    },
-    {
-      icon: Shield,
-      title: 'Secure & Reliable',
-      description: 'Your data is protected with enterprise-grade security measures.',
-    },
-    {
-      icon: Zap,
-      title: 'Fast Response',
-      description: 'Quick turnaround times for all your support inquiries.',
-    },
-  ]
-
   const popularCategories = [
     { name: 'General', count: 45, color: 'bg-blue-500' },
     { name: 'IPOS', count: 32, color: 'bg-green-500' },
     { name: 'PGW', count: 28, color: 'bg-purple-500' },
     { name: 'Leafy', count: 21, color: 'bg-orange-500' },
-    { name: 'Commercial/Corporate', count: 38, color: 'bg-red-500' },
     { name: 'TMS', count: 19, color: 'bg-indigo-500' },
   ]
 
@@ -91,45 +57,6 @@ const HomePage = () => {
                 </Button>
               </Link>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4">
-              Why Choose Our Helpdesk?
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We provide comprehensive support solutions designed to help you get answers quickly and efficiently.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {features.map((feature, index) => {
-              const Icon = feature.icon
-              return (
-                <motion.div
-                  key={feature.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card hover padding="lg" className="h-full">
-                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
-                      <Icon className="w-6 h-6 text-primary-700" />
-                    </div>
-                    <h3 className="text-xl font-display font-semibold text-gray-900 mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600">{feature.description}</p>
-                  </Card>
-                </motion.div>
-              )
-            })}
           </div>
         </div>
       </section>
