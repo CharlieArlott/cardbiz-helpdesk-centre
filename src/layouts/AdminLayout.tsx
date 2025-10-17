@@ -103,9 +103,7 @@ export const AdminLayout = () => {
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <Link to="/admin" className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">CB</span>
-              </div>
+              <img src="/cardbiz-logo.png" alt="CardBiz Logo" className="h-8 w-auto" />
               <div className="hidden sm:block">
                 <h1 className="font-display font-bold text-lg text-gray-900">CardBiz Admin</h1>
               </div>

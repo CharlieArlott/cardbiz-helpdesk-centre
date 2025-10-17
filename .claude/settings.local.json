@@ -7,7 +7,9 @@
       "Read(//c/Users/muhammad.hambal/Pictures/**)",
       "Bash(git init:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Read(//c/Users/muhammad.hambal/Desktop/**)",
+      "Bash(copy \"C:\\Users\\muhammad.hambal\\Desktop\\cardbiz-logo-png.ico\" \"C:\\Users\\muhammad.hambal\\Desktop\\chc\\public\\cardbiz-logo.ico\")"
     ],
     "deny": [],
     "ask": []

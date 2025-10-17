@@ -23,9 +23,7 @@ export const PublicLayout = () => {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">CB</span>
-              </div>
+              <img src="/cardbiz-logo.png" alt="CardBiz Logo" className="h-10 w-auto" />
               <div>
                 <h1 className="font-display font-bold text-xl text-gray-900">CardBiz</h1>
                 <p className="text-xs text-gray-500">Helpdesk Centre</p>
@@ -116,9 +114,7 @@ export const PublicLayout = () => {
             {/* Company Info */}
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">CB</span>
-                </div>
+                <img src="/cardbiz-logo.png" alt="CardBiz Logo" className="h-10 w-auto" />
                 <div>
                   <h2 className="font-display font-bold text-lg text-white">CardBiz</h2>
                   <p className="text-sm text-gray-400">Helpdesk Centre</p>
