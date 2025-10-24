@@ -2,7 +2,7 @@ export interface FAQ {
   id: string
   question: string
   answer: string
-  category: FAQCategory
+  category: string // Changed to support hierarchical paths like "Software > TMS > Merchant Support"
   tags: string[]
   helpfulCount: number
   notHelpfulCount: number
@@ -11,17 +11,28 @@ export interface FAQ {
   isPublished: boolean
 }
 
+export interface FAQCategoryNode {
+  id: string
+  name: string
+  path: string // Full path like "Software > TMS > Merchant Support"
+  children?: FAQCategoryNode[]
+}
+
 export type FAQCategory =
   | 'General'
-  | 'IPOS'
-  | 'PGW'
-  | 'Leafy'
-  | 'Commercial/Corporate'
-  | 'Customized System'
-  | 'TMS'
-  | 'CBS'
-  | 'CBP'
-  | 'CBT'
+  | 'Software > uFirst'
+  | 'Software > EASy'
+  | 'Software > TAMs'
+  | 'Software > POS'
+  | 'Software > PGW'
+  | 'Software > ESS'
+  | 'Software > eKedatangan'
+  | 'Software > eFulfillment'
+  | 'Software > PCSY'
+  | 'Software > TMS > Merchant Support'
+  | 'Software > TMS > Terminal Support'
+  | 'Hardware > Terminal > TMS > Merchant Support'
+  | 'Hardware > Terminal > TMS > Terminal Support'
 
 export interface User {
   id: string

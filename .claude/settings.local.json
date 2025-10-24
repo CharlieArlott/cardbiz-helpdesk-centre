@@ -1,15 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(dir:*)",
-      "Bash(npm install)",
-      "Bash(npm run build:*)",
-      "Read(//c/Users/muhammad.hambal/Pictures/**)",
-      "Bash(git init:*)",
+      "Bash(npm run build)",
       "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Read(//c/Users/muhammad.hambal/Desktop/**)",
-      "Bash(copy \"C:\\Users\\muhammad.hambal\\Desktop\\cardbiz-logo-png.ico\" \"C:\\Users\\muhammad.hambal\\Desktop\\chc\\public\\cardbiz-logo.ico\")"
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []

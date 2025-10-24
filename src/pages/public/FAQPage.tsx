@@ -1,11 +1,11 @@
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { ChevronDown, ThumbsUp, ThumbsDown, Check } from 'lucide-react'
+import { ChevronDown, ChevronRight, ThumbsUp, ThumbsDown, Check } from 'lucide-react'
 import SearchBar from '@/components/ui/SearchBar'
 import Card from '@/components/ui/Card'
 import Badge from '@/components/ui/Badge'
 import Button from '@/components/ui/Button'
-import { FAQ, FAQCategory } from '@/types'
+import { FAQ, FAQCategoryNode } from '@/types'
 
 // Mock data - Replace with API call
 const mockFAQs: FAQ[] = [
@@ -23,9 +23,9 @@ const mockFAQs: FAQ[] = [
   },
   {
     id: '2',
-    question: 'What are the IPOS system requirements?',
-    answer: 'The IPOS system requires Windows 10 or later, at least 4GB RAM, and an internet connection with minimum 10Mbps speed. For optimal performance, we recommend 8GB RAM and a stable broadband connection.',
-    category: 'IPOS',
+    question: 'What are the uFirst system requirements?',
+    answer: 'The uFirst system requires Windows 10 or later, at least 4GB RAM, and an internet connection with minimum 10Mbps speed. For optimal performance, we recommend 8GB RAM and a stable broadband connection.',
+    category: 'Software > uFirst',
     tags: ['system', 'requirements', 'technical'],
     helpfulCount: 32,
     notHelpfulCount: 5,
@@ -37,7 +37,7 @@ const mockFAQs: FAQ[] = [
     id: '3',
     question: 'How do I configure the Payment Gateway?',
     answer: 'To configure the Payment Gateway, navigate to Settings > Payment Gateway in your admin panel. Enter your merchant credentials provided by the payment processor. Test the connection using the "Test Mode" before going live.',
-    category: 'PGW',
+    category: 'Software > PGW',
     tags: ['payment', 'gateway', 'configuration'],
     helpfulCount: 28,
     notHelpfulCount: 2,
@@ -47,10 +47,10 @@ const mockFAQs: FAQ[] = [
   },
   {
     id: '4',
-    question: 'What is Leafy and how does it work?',
-    answer: 'Leafy is our loyalty program management system that helps businesses create and manage customer reward programs. It includes features like point tracking, tier management, and automated rewards distribution.',
-    category: 'Leafy',
-    tags: ['loyalty', 'rewards', 'program'],
+    question: 'How do I handle merchant support issues in TMS?',
+    answer: 'For merchant support in TMS, access the Merchant Portal through the admin dashboard. You can view merchant details, transaction history, and troubleshoot common issues. Use the built-in communication tools to respond to merchant queries.',
+    category: 'Software > TMS > Merchant Support',
+    tags: ['merchant', 'support', 'TMS'],
     helpfulCount: 21,
     notHelpfulCount: 1,
     createdAt: new Date(),
@@ -59,10 +59,10 @@ const mockFAQs: FAQ[] = [
   },
   {
     id: '5',
-    question: 'How do I add users to my corporate account?',
-    answer: 'From your admin dashboard, go to User Management > Add User. Fill in the required information including name, email, and role. Send the invitation, and the new user will receive an email to set up their account.',
-    category: 'Commercial/Corporate',
-    tags: ['users', 'corporate', 'management'],
+    question: 'How do I manage terminal configurations in TMS?',
+    answer: 'Terminal configurations can be managed through the TMS Terminal Support section. Navigate to Settings > Terminals, select the device, and update parameters like connection settings, transaction limits, and receipt templates.',
+    category: 'Software > TMS > Terminal Support',
+    tags: ['terminal', 'configuration', 'TMS'],
     helpfulCount: 38,
     notHelpfulCount: 4,
     createdAt: new Date(),
@@ -83,10 +83,10 @@ const mockFAQs: FAQ[] = [
   },
   {
     id: '7',
-    question: 'How do I generate transaction reports?',
-    answer: 'Navigate to Reports in your dashboard. Select the report type (Daily, Weekly, Monthly, or Custom). Choose your date range and filters, then click "Generate Report". You can export the report in PDF, Excel, or CSV format.',
-    category: 'TMS',
-    tags: ['reports', 'transactions', 'analytics'],
+    question: 'How do I troubleshoot terminal hardware issues?',
+    answer: 'First, check the physical connections and power supply. Ensure the terminal is properly connected to the network. Try restarting the device. If issues persist, check the TMS logs for error codes and contact hardware support.',
+    category: 'Hardware > Terminal > TMS > Terminal Support',
+    tags: ['hardware', 'terminal', 'troubleshooting'],
     helpfulCount: 19,
     notHelpfulCount: 3,
     createdAt: new Date(),
@@ -95,36 +95,105 @@ const mockFAQs: FAQ[] = [
   },
   {
     id: '8',
-    question: 'How do I troubleshoot connection issues?',
-    answer: 'First, check your internet connection and firewall settings. Ensure that ports 80 and 443 are open. Clear your browser cache and cookies. If the issue persists, try accessing the system from a different browser or device. Contact support if problems continue.',
-    category: 'General',
-    tags: ['troubleshooting', 'connection', 'technical'],
+    question: 'How do I manage merchant accounts on hardware terminals?',
+    answer: 'Merchant accounts on hardware terminals can be managed through the Terminal TMS Merchant Support interface. Access the terminal settings, navigate to Merchant Configuration, and update merchant details, settlement schedules, and reporting preferences.',
+    category: 'Hardware > Terminal > TMS > Merchant Support',
+    tags: ['merchant', 'terminal', 'hardware'],
     helpfulCount: 41,
     notHelpfulCount: 6,
     createdAt: new Date(),
     updatedAt: new Date(),
     isPublished: true,
   },
+  {
+    id: '9',
+    question: 'How do I use the POS system?',
+    answer: 'The POS system provides a complete point-of-sale solution. Access it through the main menu, process transactions by scanning items or entering product codes, accept payments, and generate receipts. The system automatically syncs with inventory management.',
+    category: 'Software > POS',
+    tags: ['POS', 'transactions', 'sales'],
+    helpfulCount: 55,
+    notHelpfulCount: 2,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    isPublished: true,
+  },
+  {
+    id: '10',
+    question: 'What is EASy and how do I access it?',
+    answer: 'EASy (Electronic Application System) streamlines business application processes. Access it through your dashboard under Software > EASy. Submit applications, track status, and manage documentation all in one place.',
+    category: 'Software > EASy',
+    tags: ['EASy', 'applications', 'workflow'],
+    helpfulCount: 29,
+    notHelpfulCount: 1,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    isPublished: true,
+  },
 ]
 
-const categories: FAQCategory[] = [
-  'General',
-  'IPOS',
-  'PGW',
-  'Leafy',
-  'Commercial/Corporate',
-  'Customized System',
-  'TMS',
-  'CBS',
-  'CBP',
-  'CBT',
+// Hierarchical category structure
+const categoryTree: FAQCategoryNode[] = [
+  {
+    id: 'general',
+    name: 'General',
+    path: 'General',
+  },
+  {
+    id: 'software',
+    name: 'Software',
+    path: 'Software',
+    children: [
+      { id: 'ufirst', name: 'uFirst', path: 'Software > uFirst' },
+      { id: 'easy', name: 'EASy', path: 'Software > EASy' },
+      { id: 'tams', name: 'TAMs', path: 'Software > TAMs' },
+      { id: 'pos', name: 'POS', path: 'Software > POS' },
+      { id: 'pgw', name: 'PGW', path: 'Software > PGW' },
+      { id: 'ess', name: 'ESS', path: 'Software > ESS' },
+      { id: 'ekedatangan', name: 'eKedatangan', path: 'Software > eKedatangan' },
+      { id: 'efulfillment', name: 'eFulfillment', path: 'Software > eFulfillment' },
+      { id: 'pcsy', name: 'PCSY', path: 'Software > PCSY' },
+      {
+        id: 'software-tms',
+        name: 'TMS',
+        path: 'Software > TMS',
+        children: [
+          { id: 'software-tms-merchant', name: 'Merchant Support', path: 'Software > TMS > Merchant Support' },
+          { id: 'software-tms-terminal', name: 'Terminal Support', path: 'Software > TMS > Terminal Support' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'hardware',
+    name: 'Hardware',
+    path: 'Hardware',
+    children: [
+      {
+        id: 'terminal',
+        name: 'Terminal',
+        path: 'Hardware > Terminal',
+        children: [
+          {
+            id: 'hardware-terminal-tms',
+            name: 'TMS',
+            path: 'Hardware > Terminal > TMS',
+            children: [
+              { id: 'hardware-tms-merchant', name: 'Merchant Support', path: 'Hardware > Terminal > TMS > Merchant Support' },
+              { id: 'hardware-tms-terminal', name: 'Terminal Support', path: 'Hardware > Terminal > TMS > Terminal Support' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 ]
 
 const FAQPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<FAQCategory | 'All'>('All')
+  const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [expandedFAQ, setExpandedFAQ] = useState<string | null>(null)
   const [feedbackGiven, setFeedbackGiven] = useState<Record<string, 'helpful' | 'not-helpful'>>({})
+  const [expandedCategories, setExpandedCategories] = useState<Set<string>>(new Set(['software', 'hardware']))
 
   const filteredFAQs = useMemo(() => {
     let filtered = mockFAQs
@@ -158,9 +227,78 @@ const FAQPage = () => {
     setExpandedFAQ(expandedFAQ === faqId ? null : faqId)
   }
 
-  const getCategoryCount = (category: FAQCategory | 'All') => {
-    if (category === 'All') return mockFAQs.length
-    return mockFAQs.filter((faq) => faq.category === category).length
+  const getCategoryCount = (categoryPath: string) => {
+    if (categoryPath === 'All') return mockFAQs.length
+    // Count FAQs that match the category path exactly or start with it (for parent categories)
+    return mockFAQs.filter((faq) =>
+      faq.category === categoryPath || faq.category.startsWith(categoryPath + ' >')
+    ).length
+  }
+
+  const toggleCategory = (categoryId: string) => {
+    setExpandedCategories((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(categoryId)) {
+        newSet.delete(categoryId)
+      } else {
+        newSet.add(categoryId)
+      }
+      return newSet
+    })
+  }
+
+  const renderCategoryNode = (node: FAQCategoryNode, level: number = 0) => {
+    const hasChildren = node.children && node.children.length > 0
+    const isExpanded = expandedCategories.has(node.id)
+    const count = getCategoryCount(node.path)
+    const isSelected = selectedCategory === node.path
+
+    return (
+      <div key={node.id}>
+        <button
+          onClick={() => {
+            if (hasChildren) {
+              toggleCategory(node.id)
+            }
+            setSelectedCategory(node.path)
+          }}
+          className={`
+            w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200
+            flex items-center justify-between group
+            ${isSelected
+              ? 'bg-primary-50 text-primary-700 font-medium'
+              : 'text-gray-700 hover:bg-gray-50'
+            }
+          `}
+          style={{ paddingLeft: `${level * 12 + 16}px` }}
+        >
+          <div className="flex items-center gap-2 flex-1">
+            {hasChildren && (
+              <ChevronRight
+                className={`w-4 h-4 transition-transform duration-200 flex-shrink-0 ${
+                  isExpanded ? 'rotate-90' : ''
+                }`}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  toggleCategory(node.id)
+                }}
+              />
+            )}
+            <span className="text-sm">{node.name}</span>
+          </div>
+          {count > 0 && (
+            <Badge variant="secondary" size="sm">
+              {count}
+            </Badge>
+          )}
+        </button>
+        {hasChildren && isExpanded && (
+          <div className="mt-1">
+            {node.children!.map((child) => renderCategoryNode(child, level + 1))}
+          </div>
+        )}
+      </div>
+    )
   }
 
   return (
@@ -204,7 +342,7 @@ const FAQPage = () => {
             <aside className="lg:col-span-1">
               <Card padding="md" className="sticky top-20">
                 <h2 className="font-display font-semibold text-lg text-gray-900 mb-4">
-                  Categories
+                  Product FAQ
                 </h2>
                 <div className="space-y-1">
                   <button
@@ -224,26 +362,7 @@ const FAQPage = () => {
                       {getCategoryCount('All')}
                     </Badge>
                   </button>
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`
-                        w-full text-left px-4 py-2.5 rounded-lg transition-all duration-200
-                        flex items-center justify-between
-                        ${
-                          selectedCategory === category
-                            ? 'bg-primary-50 text-primary-700 font-medium'
-                            : 'text-gray-700 hover:bg-gray-50'
-                        }
-                      `}
-                    >
-                      <span className="text-sm">{category}</span>
-                      <Badge variant="secondary" size="sm">
-                        {getCategoryCount(category)}
-                      </Badge>
-                    </button>
-                  ))}
+                  {categoryTree.map((category) => renderCategoryNode(category))}
                 </div>
               </Card>
             </aside>
